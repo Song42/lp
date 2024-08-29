@@ -1,0 +1,11 @@
+--- ../linux/Makefile	2024-08-08 12:48:51.910442154 -0400
++++ Makefile	2024-08-09 13:28:30.249227687 -0400
+@@ -2,7 +2,7 @@
+ VERSION = 6
+ PATCHLEVEL = 11
+ SUBLEVEL = 0
+-EXTRAVERSION = -rc2
++EXTRAVERSION = -thor_kernel
+ NAME = Baby Opossum Posse
+ 
+ # *DOCUMENTATION*

@@ -1,0 +1,1 @@
+savedcmd_/home/sch/a09/mounts.ko := ld -r -m elf_x86_64 -z noexecstack --no-warn-rwx-segments --build-id=sha1  -T scripts/module.lds -o /home/sch/a09/mounts.ko /home/sch/a09/mounts.o /home/sch/a09/mounts.mod.o

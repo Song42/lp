@@ -1,0 +1,1 @@
+sudo rmmod ft_misc_driver.ko && make && sudo insmod ft_misc_driver.ko && gcc main.c && sudo ./a.out
