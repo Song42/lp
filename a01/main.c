@@ -6,7 +6,6 @@ MODULE_AUTHOR("schaehun");
 MODULE_DESCRIPTION("hello world");
 MODULE_LICENSE("GPL");
 MODULE_VERSION("1.0");
-MODULE_INFO(intree, "Y");
 
 static int __init hello_init(void)
 {

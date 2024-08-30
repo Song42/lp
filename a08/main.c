@@ -28,27 +28,22 @@ static struct miscdevice	myfd_device = {
 	.fops	= &myfd_fops
 };
 
-static char	str[PAGE_SIZE];
+char	str[PAGE_SIZE];
 
 ssize_t	myfd_read(struct file *fp, char __user *user, size_t size, loff_t *offs)
 {
 	size_t	i;
 	size_t	j;
-	int	status;
 	char	*tmp;
+	ssize_t	ret;
 
-	if (strlen(str) == 0)
-		return 0;
 	tmp = kmalloc(sizeof(char) * (strlen(str) + 1), GFP_KERNEL);
-	if (!tmp)
-		return -ENOMEM;
-	for (i = 0, j = strlen(str) - 1; j != 0; --j, ++i)
+	for (i = 0, j = strlen(str) - 1; j != -1; j--, i++)
 		tmp[i] = str[j];
-	tmp[i++] = str[j--];
 	tmp[i] = 0x0;
-	status = simple_read_from_buffer(user, size, offs, tmp, i);
+	ret = simple_read_from_buffer(user, size, offs, tmp, i);
 	kfree(tmp);
-	return status;
+	return ret;
 }
 
 ssize_t	myfd_write(struct file *fp, const char __user *user, size_t size,
@@ -56,19 +51,15 @@ ssize_t	myfd_write(struct file *fp, const char __user *user, size_t size,
 {
 	ssize_t	res;
 
-	res = simple_write_to_buffer(str, PAGE_SIZE - 1, offs, user, size);
-	if (res >= 0)
-		str[res++] = 0x0;
+	res = simple_write_to_buffer(str, size, offs, user, size);
+	str[size] = 0x0;
 	return res;
 }
 
 static int __init myfd_init(void)
 {
-	int retval;
-
-	memset(str, 0, PAGE_SIZE);
-	retval = misc_register(&myfd_device);
-	return retval;
+	misc_register(&myfd_device);
+	return 0;
 }
 
 static void __exit myfd_cleanup(void)

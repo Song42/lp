@@ -11,8 +11,8 @@
 #define PROCFS_MAX_SIZE 1024
 #define PROCFS_NAME "mymounts"
 
-MODULE_LICENSE("GPL");
 MODULE_AUTHOR("schaehun");
+MODULE_LICENSE("GPL");
 
 static struct proc_dir_entry *proc_file;
 

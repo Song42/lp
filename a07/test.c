@@ -128,7 +128,7 @@ int	main(void)
 {
 	test_id();
 	test_jiffies();
-	//test_foo();
+	test_foo();
 
 	return (0);
 }

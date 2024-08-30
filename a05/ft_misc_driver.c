@@ -4,8 +4,8 @@
 #include <linux/fs.h>
 #include <linux/uaccess.h>
 
-MODULE_LICENSE("GPL");
 MODULE_AUTHOR("schaehun");
+MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("misc");
 
 #define LOGIN "schaehun"
@@ -24,7 +24,7 @@ static ssize_t ft_write(struct file *file, const char __user *buf, size_t count,
 	for (int i = 0; i < sizeof(kernel_buf); i++)
 		kernel_buf[i] = 0;
 	
-	printk(KERN_INFO "count: %ld\nbuf: %s\n", count, buf);
+	//printk(KERN_INFO "count: %ld\nbuf: %s\n", count, buf);
 	*ppos = 0;
 	len = simple_write_to_buffer(kernel_buf, sizeof(kernel_buf) - 1, ppos, buf, count);
 	if (len < 0)
@@ -35,8 +35,7 @@ static ssize_t ft_write(struct file *file, const char __user *buf, size_t count,
 	//for (int i = 0; i < len * 2; i++)
 	//	printk(KERN_INFO "%c ", kernel_buf[i]);
 	//printk(KERN_INFO "end loop\n");
-
-	printk(KERN_INFO "kernel_buf = %s\nlen: %ld\n", kernel_buf, len);
+	//printk(KERN_INFO "kernel_buf = %s\nlen: %ld\n", kernel_buf, len);
 
 	if (strcmp(kernel_buf, LOGIN) == 0)
 		return count;
@@ -66,7 +65,7 @@ static int __init ft_init(void) {
 	if (ret)
 		printk(KERN_ERR "Can not register misc device. name : %s\n", "fortytwo");
 	else
-		printk(KERN_INFO "misc device registed. name : %s\n", "fortytwo");
+		printk(KERN_INFO "misc device registered. name : %s\n", "fortytwo");
 
 	return ret;
 }
